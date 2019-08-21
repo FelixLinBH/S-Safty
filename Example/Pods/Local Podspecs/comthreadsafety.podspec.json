@@ -1,0 +1,22 @@
+{
+  "name": "comthreadsafety",
+  "version": "0.1.0",
+  "summary": "A short description of comthreadsafety.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/humdrum81211/comthreadsafety",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Felix.Lin": "linhandev@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/humdrum81211/comthreadsafety.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "comthreadsafety/Classes/**/*"
+}
