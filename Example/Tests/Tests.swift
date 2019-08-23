@@ -119,54 +119,49 @@ class TableOfContentsSpec: QuickSpec {
                 array.append([1,4])
                 let flatMapResult = array.flatMap{ $0 }
                 expect(flatMapResult) == [5,2,1,4]
+            }
+            
+            it("can do compactMap"){
+                let array : SyncArray<Int> = SyncArray()
+                array.append(1)
+                array.append(2)
+                let compactMapResult = array.compactMap{ $0+1 }
+                expect(compactMapResult) == [2,3]
+            }
+          
+            it("can do contains"){
+                let array : SyncArray<String> = SyncArray()
+                array.append("Sonna")
+                array.append("Joe")
+                let containsResult = array.contains(where: { (string) -> Bool in
+                    return string == "Joe"
+                })
+                expect(containsResult) == true
+            }
+            
+            it("can do forEach"){
+                let array = SyncArray<Int>(repeating: 1, count: 200)
+                array.forEach({ (value) in
+                    expect(value) == 1
+                })
+            }
+            
+            it("can do subscript"){
+                let array = SyncArray<Any>(repeating: "", count: 3)
+                array[0] = 100
+                array[1] = "test"
+                array[2] = 2.0
+                
+                let a = array[0] as? Int ?? 0
+                let b = array[1] as? String ?? ""
+                let c = array[2] as? Double ?? 0.0
+                expect(a) == 100
+                expect(b) == "test"
+                expect(c) == 2.0
 
             }
             
-            //                array.append(5)
-            //                array.append(6)
-            //                expect(array[0]) == 5
-            //                expect(array.first) == 5
-            //                expect(array.last) == 6
-            //                expect(array.count) == 2
-            //                expect(array.isEmpty) == false
-            //                expect(array.underestimatedCount) <= array.count
-            //                array.append(contentsOf: [7,8])
-            //                expect(array[2]) == 7
-            //                array.remove(at: 2)
-            //                expect(array[2]) == 8
-            //                array.insert(3, at: 2)
-            //                expect(array[2]) == 3
-            
-//
-//            it("will eventually fail") {
-//                expect("time").toEventually( equal("done") )
-//            }
-//
-//            context("these will pass") {
-//
-//                it("can do maths") {
-//                    expect(23) == 23
-//                }
-//
-//                it("can read") {
-//                    expect("🐮") == "🐮"
-//                }
-//
-//                it("will eventually pass") {
-//                    var time = "passing"
-//
-//                    DispatchQueue.main.async {
-//                        time = "done"
-//                    }
-//
-//                    waitUntil { done in
-//                        Thread.sleep(forTimeInterval: 0.5)
-//                        expect(time) == "done"
-//
-//                        done()
-//                    }
-//                }
-//            }
+ 
         }
     }
 }
