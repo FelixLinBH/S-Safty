@@ -181,17 +181,18 @@ public extension SyncArray{
         return result
     }
     
-    func flatMap<ElementOfResult>(_ transform: (Element) throws -> ElementOfResult?) rethrows -> [ElementOfResult]{
-        var result = [ElementOfResult]()
+    func flatMap<SegmentOfResult>(_ transform: (Element) throws -> SegmentOfResult) rethrows -> [SegmentOfResult.Element] where SegmentOfResult : Sequence{
+        var result = [SegmentOfResult.Element]()
         queue.sync {
             do{
-                result = try self.array.compactMap(transform)
+                result = try self.array.flatMap(transform)
             } catch let error as NSError {
                 print("\(error)")
             }
         }
         return result
     }
+    
     
     func compactMap<ElementOfResult>(_ transform: (Element) throws -> ElementOfResult?) rethrows -> [ElementOfResult]{
         var result = [ElementOfResult]()

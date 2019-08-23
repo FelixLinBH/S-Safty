@@ -62,7 +62,7 @@ class TableOfContentsSpec: QuickSpec {
                 })
             }
             
-            it("can do first,firstIndex,last,lastIndex,filter,sorted") {
+            it("can do first,firstIndex,last,lastIndex,filter") {
                 let array : SyncArray<String> = SyncArray()
                 array.append("one")
                 array.append("two")
@@ -93,12 +93,34 @@ class TableOfContentsSpec: QuickSpec {
                 let filterResult = array.filter(isIncluded: { (string) -> Bool in
                     return string == "one"
                 })
+                expect(filterResult.count) == 2
+                
+               
                 
             }
             
-        
+            it("can do sorted"){
+                let array : SyncArray<Int> = SyncArray()
+                array.append(5)
+                array.append(1)
+                array.append(3)
+                array.append(2)
+                array.append(4)
+                array.append(6)
+                let sortResult = array.sorted(by: { (a, b) -> Bool in
+                    return a < b
+                })
+                expect(sortResult) == [1,2,3,4,5,6]
+            }
             
-            
+            it("can do flatMap"){
+                let array : SyncArray<[Int]> = SyncArray()
+                array.append([5,2])
+                array.append([1,4])
+                let flatMapResult = array.flatMap{ $0 }
+                expect(flatMapResult) == [5,2,1,4]
+
+            }
             
             //                array.append(5)
             //                array.append(6)
