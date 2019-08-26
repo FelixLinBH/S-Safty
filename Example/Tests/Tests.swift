@@ -6,7 +6,7 @@ import comthreadsafety
 
 class TableOfContentsSpec: QuickSpec {
     override func spec() {
-        describe("Testes") {
+        describe("Testes of array method") {
             
             it("thread safty while appending") {
                 let array = SyncArray<Int>()
@@ -162,8 +162,18 @@ class TableOfContentsSpec: QuickSpec {
                 expect(c) == 2.0
 
             }
-            
- 
+        
         }
+        
+        describe("Testes of dictionary method") {
+            it("can do subscript"){
+                let dic = SyncDictionary<String, Any>()
+                dic["test1"] = 100
+                dic["test2"] = "test"
+                expect(dic["test1"] as? Int ?? 0) == 100
+                expect(dic["test2"] as? String ?? "") == "test"
+            }
+        }
+        
     }
 }
