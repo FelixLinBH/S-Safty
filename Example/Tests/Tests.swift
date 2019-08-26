@@ -49,11 +49,13 @@ class TableOfContentsSpec: QuickSpec {
             
             it("thread safty while inserting") {
                 let array = SyncArray<Int>(repeating: 0, count: 1000)
+                var done = 0
                 DispatchQueue.concurrentPerform(iterations: 1000, execute: { (index) in
                     print("\(index)")
                     array.insert(index, at: index)
+                    done += 1
                     DispatchQueue.global().sync {
-                        guard index == 999 else { return }
+                        guard done == 999 else { return }
                         expect(array[index]) != 0
                         array.removeAll(completion: { (result) in
                             expect(result.count) == 0
