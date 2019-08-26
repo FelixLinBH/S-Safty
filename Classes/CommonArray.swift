@@ -255,3 +255,15 @@ public extension SyncArray{
         }
     }
 }
+
+// MARK: - Infix operators
+public extension SyncArray {
+    
+    static func +=(left: inout SyncArray, right: Element) {
+        left.append(right)
+    }
+    
+    static func +=(left: inout SyncArray, right: [Element]) {
+        left.append(contentsOf: right)
+    }
+}

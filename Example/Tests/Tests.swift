@@ -160,7 +160,17 @@ class TableOfContentsSpec: QuickSpec {
                 expect(a) == 100
                 expect(b) == "test"
                 expect(c) == 2.0
-
+            }
+            
+            it("can do operators"){
+                var array : SyncArray<Int> = SyncArray()
+                array.append(1)
+                array.append(2)
+                array += 3
+                array += [4,5]
+                expect(array[2]) == 3
+                expect(array[3]) == 4
+                expect(array[4]) == 5
             }
         
         }

@@ -16,6 +16,21 @@ public class SyncDictionary<Key, Value> where Key : Hashable {
 
 //MARK: Properties
 public extension SyncDictionary {
+    
+}
+
+//MARK: Mutating
+public extension SyncDictionary {
+    
+}
+
+//MARK: Immutable
+public extension SyncDictionary {
+    
+}
+
+//MARK: Subscript
+public extension SyncDictionary {
     subscript(key: Key) -> Value?{
         get {
             var result: Value?
