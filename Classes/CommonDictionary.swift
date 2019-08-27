@@ -16,7 +16,21 @@ public class SyncDictionary<Key, Value> where Key : Hashable {
 
 //MARK: Properties
 public extension SyncDictionary {
+    var count: Int {
+        var result = 0
+        queue.sync {
+            result = self.dictionary.count
+        }
+        return result
+    }
     
+    var isEmpty: Bool {
+        var result = true
+        queue.sync {
+            result = self.dictionary.isEmpty
+        }
+        return result
+    }
 }
 
 //MARK: Mutating
