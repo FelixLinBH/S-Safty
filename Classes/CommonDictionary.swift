@@ -2,7 +2,7 @@
 //  CommonDictionary.swift
 //  comthreadsafety
 //
-//  Created by Felix Lin林柏含 on 2019/8/26.
+//  Created by FelixLinBH on 2019/8/26.
 //
 
 import Foundation
@@ -31,11 +31,39 @@ public extension SyncDictionary {
         }
         return result
     }
+    var first: (key: Key, value: Value)? {
+        var result: (key: Key, value: Value)?
+        queue.sync {
+            result = self.dictionary.first
+        }
+        return result
+    }
+    var underestimatedCount: Int {
+        var result = 0
+        queue.sync {
+            result = self.dictionary.underestimatedCount
+        }
+        return result
+    }
 }
 
 //MARK: Mutating
 public extension SyncDictionary {
-    
+//    func updateValue(_ value: Value, forKey key: Key) -> Value?{
+//        
+//    }
+//    func merge<S>(_ other: S, uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows where S : Sequence, S.Element == (Key, Value){
+//        
+//    }
+//    func merge(_ other: [Key : Value], uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows{
+//        
+//    }
+//    func removeValue(forKey key: Key) -> Value?{
+//        
+//    }
+//    func removeAll(keepingCapacity keepCapacity: Bool = false){
+//        
+//    }
 }
 
 //MARK: Immutable
