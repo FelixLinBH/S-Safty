@@ -49,21 +49,48 @@ public extension SyncDictionary {
 
 //MARK: Mutating
 public extension SyncDictionary {
-//    func updateValue(_ value: Value, forKey key: Key) -> Value?{
-//        
-//    }
-//    func merge<S>(_ other: S, uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows where S : Sequence, S.Element == (Key, Value){
-//        
-//    }
-//    func merge(_ other: [Key : Value], uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows{
-//        
-//    }
-//    func removeValue(forKey key: Key) -> Value?{
-//        
-//    }
-//    func removeAll(keepingCapacity keepCapacity: Bool = false){
-//        
-//    }
+    func updateValue(_ value: Value, forKey key: Key) -> Value?{
+        var result: Value?
+        queue.async(flags: .barrier) {
+            result = self.dictionary.updateValue(value, forKey: key)
+        }
+        return result
+    }
+    
+    func merge<S>(_ other: S, uniquingKeysWith combine: @escaping(Value, Value) throws -> Value) rethrows where S : Sequence, S.Element == (Key, Value){
+        queue.async(flags: .barrier) {
+            do{
+                try self.dictionary.merge(other, uniquingKeysWith: combine)
+            } catch let error as NSError {
+                print("\(error)")
+           }
+        }
+        
+    }
+    
+    func merge(_ other: [Key : Value], uniquingKeysWith combine: @escaping(Value, Value) throws -> Value) rethrows{
+        queue.async(flags: .barrier) {
+            do{
+                try self.dictionary.merge(other, uniquingKeysWith: combine)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+    }
+    
+    func removeValue(forKey key: Key) -> Value?{
+        var result: Value?
+        queue.async(flags: .barrier) {
+            result = self.dictionary.removeValue(forKey: key)
+        }
+        return result
+    }
+    
+    func removeAll(keepingCapacity keepCapacity: Bool = false){
+        queue.async(flags: .barrier) {
+            self.dictionary.removeAll(keepingCapacity: keepCapacity)
+        }
+    }
 }
 
 //MARK: Immutable
