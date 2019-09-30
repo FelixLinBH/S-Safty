@@ -45,6 +45,22 @@ public extension SyncDictionary {
         }
         return result
     }
+    
+    var keys: Dictionary<Key, Value>.Keys {
+        get{
+            queue.sync {
+                return self.dictionary.keys
+            }
+        }
+    }
+    
+    var values: Dictionary<Key, Value>.Values {
+        get{
+            queue.sync {
+                return self.dictionary.values
+            }
+        }
+    }
 }
 
 //MARK: Mutating
@@ -95,7 +111,78 @@ public extension SyncDictionary {
 
 //MARK: Immutable
 public extension SyncDictionary {
+    typealias kElement = (key: Key, value: Value)
+    func filter(_ isIncluded: (kElement) throws -> Bool) rethrows -> [Key : Value]{
+        var result = [Key : Value]()
+        queue.sync {
+            do{
+                result = try self.dictionary.filter(isIncluded)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+        return result
+    }
     
+    func mapValues<T>(_ transform: (Value) throws -> T) rethrows -> [Key : T]{
+        var result = [Key : T]()
+        queue.sync {
+            do{
+                result = try self.dictionary.mapValues(transform)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+        return result
+    }
+
+    func compactMapValues<T>(_ transform: (Value) throws -> T?) rethrows -> [Key : T]{
+        var result = [Key : T]()
+        queue.sync {
+            do{
+                result = try self.dictionary.compactMapValues(transform)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+        return result
+    }
+    
+    func merging<S>(_ other: S, uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows -> [Key : Value] where S : Sequence, S.Element == (Key, Value){
+        var result = [Key : Value]()
+        queue.sync {
+           do{
+               result = try self.dictionary.merging(other, uniquingKeysWith: combine)
+           } catch let error as NSError {
+               print("\(error)")
+           }
+        }
+        return result
+    }
+    
+    func merging(_ other: [Key : Value], uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows -> [Key : Value]{
+        var result = [Key : Value]()
+        queue.sync {
+            do{
+                result = try self.dictionary.merging(other, uniquingKeysWith: combine)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+        return result
+    }
+    
+    func map<T>(_ transform: ((key: Key, value: Value)) throws -> T) rethrows -> [T]{
+         var result = [T]()
+        queue.sync {
+            do{
+                result = try self.dictionary.map(transform)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+        return result
+    }
 }
 
 //MARK: Subscript
