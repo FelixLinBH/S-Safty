@@ -173,7 +173,7 @@ public extension SyncDictionary {
     }
     
     func map<T>(_ transform: ((key: Key, value: Value)) throws -> T) rethrows -> [T]{
-         var result = [T]()
+        var result = [T]()
         queue.sync {
             do{
                 result = try self.dictionary.map(transform)
@@ -183,6 +183,23 @@ public extension SyncDictionary {
         }
         return result
     }
+    
+    func dropFirst(_ k: Int = 1) -> Slice<Dictionary<Key, Value>>{
+        queue.sync {
+            return self.dictionary.dropFirst()
+        }
+    }
+    
+    func dropLast(_ k: Int = 1) -> Slice<Dictionary<Key, Value>>{
+        queue.sync {
+            return self.dictionary.dropLast()
+        }
+    }
+    
+
+
+    
+    
 }
 
 //MARK: Subscript
