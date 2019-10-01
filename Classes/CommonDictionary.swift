@@ -197,8 +197,105 @@ public extension SyncDictionary {
     }
     
 
-
+    func firstIndex(where predicate: ((key: Key, value: Value)) throws -> Bool) rethrows -> Dictionary<Key, Value>.Index?{
+        var result:Dictionary<Key, Value>.Index?
+        queue.sync {
+            do{
+                result = try self.dictionary.firstIndex(where: predicate)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+        return result
+    }
     
+    func flatMap<ElementOfResult>(_ transform: ((key: Key, value: Value)) throws -> ElementOfResult?) rethrows -> [ElementOfResult]{
+        var result = [ElementOfResult]()
+        queue.sync {
+            do{
+                result = try self.dictionary.flatMap(transform)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+        return result
+    }
+    
+    func forEach(_ body: ((key: Key, value: Value)) throws -> Void) rethrows{
+        queue.sync {
+            do{
+                try self.dictionary.forEach(body)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+    }
+    
+    func first(where predicate: ((key: Key, value: Value)) throws -> Bool) rethrows -> (key: Key, value: Value)?{
+        var result:(key: Key, value: Value)?
+        queue.sync {
+            do{
+                result = try self.dictionary.first(where: predicate)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+        return result
+    }
+    
+    func contains(where predicate: ((key: Key, value: Value)) throws -> Bool) rethrows -> Bool{
+        var result = false
+        queue.sync {
+            do{
+                result = try self.dictionary.contains(where: predicate)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+        return result
+    }
+    
+    func index(_ i: Dictionary<Key, Value>.Index, offsetBy distance: Int) -> Dictionary<Key, Value>.Index{
+        queue.sync {
+            return self.dictionary.index(i, offsetBy: distance)
+        }
+    }
+    
+    func index(_ i: Dictionary<Key, Value>.Index, offsetBy distance: Int, limitedBy limit: Dictionary<Key, Value>.Index) -> Dictionary<Key, Value>.Index?{
+        queue.sync {
+            return self.dictionary.index(i, offsetBy: distance, limitedBy: limit)
+        }
+    }
+    
+    func formIndex(_ i: inout Dictionary<Key, Value>.Index, offsetBy distance: Int){
+        queue.sync {
+            return self.dictionary.formIndex(&i, offsetBy: distance)
+       }
+    }
+    
+    func formIndex(_ i: inout Dictionary<Key, Value>.Index, offsetBy distance: Int, limitedBy limit: Dictionary<Key, Value>.Index) -> Bool{
+        queue.sync {
+             return self.dictionary.formIndex(&i, offsetBy: distance, limitedBy: limit)
+        }
+    }
+    
+    func distance(from start: Dictionary<Key, Value>.Index, to end: Dictionary<Key, Value>.Index) -> Int{
+        queue.sync {
+            return self.dictionary.distance(from: start, to: end)
+        }
+    }
+    
+    func randomElement<T>(using generator: inout T) -> (key: Key, value: Value)? where T : RandomNumberGenerator{
+        queue.sync {
+            return self.dictionary.randomElement(using: &generator)
+        }
+    }
+    
+    func randomElement() -> (key: Key, value: Value)?{
+        queue.sync {
+            return self.dictionary.randomElement()
+        }
+    }
     
 }
 
