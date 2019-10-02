@@ -221,6 +221,18 @@ public extension SyncDictionary {
         return result
     }
     
+    func compactMap<ElementOfResult>(_ transform: ((key: Key, value: Value)) throws -> ElementOfResult?) rethrows -> [ElementOfResult]{
+        var result = [ElementOfResult]()
+        queue.sync {
+            do{
+                result = try self.dictionary.compactMap(transform)
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }
+        return result
+    }
+    
     func forEach(_ body: ((key: Key, value: Value)) throws -> Void) rethrows{
         queue.sync {
             do{
@@ -296,7 +308,7 @@ public extension SyncDictionary {
             return self.dictionary.randomElement()
         }
     }
-    
+
 }
 
 //MARK: Subscript
