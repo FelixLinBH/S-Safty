@@ -12,7 +12,6 @@ class TableOfContentsSpec: QuickSpec {
                 let array = SyncArray<Int>()
                 DispatchQueue.concurrentPerform(iterations: 1000, execute: { (index) in
                     let last = array.last ?? 0
-                    print(index)
                     array.append(last+1)
                     DispatchQueue.global().sync {
                         guard index == 999 else { return }
@@ -36,7 +35,6 @@ class TableOfContentsSpec: QuickSpec {
                 let array = SyncArray<Int>()
                 DispatchQueue.concurrentPerform(iterations: 1000, execute: { (index) in
                     let last = array.first ?? 0
-                    print(index)
                     array.append(contentsOf: [last+1,last+2])
                     DispatchQueue.global().sync {
                         guard index == 999 else { return }
@@ -51,7 +49,6 @@ class TableOfContentsSpec: QuickSpec {
                 let array = SyncArray<Int>(repeating: 0, count: 1000)
                 var done = 0
                 DispatchQueue.concurrentPerform(iterations: 1000, execute: { (index) in
-                    print("\(index)")
                     array.insert(index, at: index)
                     done += 1
                     DispatchQueue.global().sync {
