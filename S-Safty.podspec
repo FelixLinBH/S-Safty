@@ -9,7 +9,8 @@
 Pod::Spec.new do |s|
   s.name             = 'S-Safty'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of S-Safty.'
+  s.summary          = 'Made the component of common module thread-safty simply'
+  s.swift_version = '4.0'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = 'Made the component of common module thread-safty ssimply'
+  s.description      = 'S-Safty provides some module which includes array and dictionary made thread-safty'
 
   s.homepage         = 'https://github.com/FelixLinBH/S-Safty'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
@@ -28,7 +29,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'comthreadsafety/Classes/*'
+  s.source_files = 'Classes/*'
   
   # s.resource_bundles = {
   #   'comthreadsafety' => ['comthreadsafety/Assets/*.png']

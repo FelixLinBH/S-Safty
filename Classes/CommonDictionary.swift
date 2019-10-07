@@ -213,7 +213,7 @@ public extension SyncDictionary {
         var result = [ElementOfResult]()
         queue.sync {
             do{
-                result = try self.dictionary.flatMap(transform)
+                result = try self.dictionary.compactMap(transform)
             } catch let error as NSError {
                 print("\(error)")
             }

@@ -42,7 +42,7 @@
 		607FACE51AFB9204008FA782 /* comthreadsafety_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = comthreadsafety_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		7480087E93D982BDBB18FD58 /* comthreadsafety.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = comthreadsafety.podspec; path = ../comthreadsafety.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		7480087E93D982BDBB18FD58 /* S-Safty.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "S-Safty.podspec"; path = "../S-Safty.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		791B27163D1DEBBFAA90A17B /* Pods-comthreadsafety_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-comthreadsafety_Tests.release.xcconfig"; path = "Target Support Files/Pods-comthreadsafety_Tests/Pods-comthreadsafety_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		7D7B7148F59719F07D58E92F /* Pods_comthreadsafety_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_comthreadsafety_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A59ECB425F74CCAEDD3FB29B /* Pods-comthreadsafety_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-comthreadsafety_Example.debug.xcconfig"; path = "Target Support Files/Pods-comthreadsafety_Example/Pods-comthreadsafety_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				7480087E93D982BDBB18FD58 /* comthreadsafety.podspec */,
+				7480087E93D982BDBB18FD58 /* S-Safty.podspec */,
 				41869CF2201C45A976819E32 /* README.md */,
 				1E16CFB16EFA1973398F8DE2 /* LICENSE */,
 			);
