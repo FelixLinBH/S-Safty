@@ -1,6 +1,6 @@
 //
 //  CommonDictionary.swift
-//  comthreadsafety
+//  S-Safty
 //
 //  Created by FelixLinBH on 2019/8/26.
 //
@@ -8,7 +8,7 @@
 import Foundation
 
 public class SyncDictionary<Key, Value> where Key : Hashable {
-    fileprivate let queue = DispatchQueue(label: "com.threadsafety.dictionary.queue")
+    fileprivate let queue = DispatchQueue(label: "com.ssafty.dictionary.queue")
     fileprivate var dictionary = Dictionary<Key, Value>()
     public init(){
     }

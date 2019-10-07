@@ -1,6 +1,6 @@
 //
 //  CommonArray.swift
-//  comthreadsafety
+//  S-Safty
 //
 //  Created by FelixLinBH on 2019/8/21.
 //
@@ -8,7 +8,7 @@
 import Foundation
 
 public class SyncArray<Element> {
-    fileprivate let queue = DispatchQueue(label: "com.threadsafety.array.queue")
+    fileprivate let queue = DispatchQueue(label: "com.ssafty.array.queue")
     fileprivate var array = [Element]()
     public init(){
     }
