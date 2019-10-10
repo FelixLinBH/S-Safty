@@ -175,10 +175,34 @@ class TableOfContentsSpec: QuickSpec {
         describe("Testes of dictionary method") {
             it("can do subscript"){
                 let dic = SyncDictionary<String, Any>()
-                dic["test1"] = 100
-                dic["test2"] = "test"
-                expect(dic["test1"] as? Int ?? 0) == 100
-                expect(dic["test2"] as? String ?? "") == "test"
+                DispatchQueue.concurrentPerform(iterations: 100) { (index) in
+                    dic[String(index)] = (100+index)
+                    DispatchQueue.global().sync {
+                        expect(dic[String(index)] as? Int ?? 0) == (100+index)
+                    }
+                }
+            }
+            
+            it("thread safty while appending") {
+                let dictionary = SyncDictionary<Int, Any>()
+                DispatchQueue.concurrentPerform(iterations: 1000, execute: { (index) in
+                    dictionary[index] = "index=\(index)"
+                    DispatchQueue.global().sync {
+                        guard index == 999 else { return }
+                        expect(dictionary.isEmpty) == false
+                        expect(dictionary.underestimatedCount) <= 1000
+                        expect(dictionary.count) == 1000
+                        DispatchQueue.concurrentPerform(iterations: 1000, execute: { (index) in
+                            dictionary.removeValue(forKey: index)
+                            DispatchQueue.global().sync {
+                                guard index == 999 else { return }
+                                expect(dictionary.isEmpty) == true
+                                expect(dictionary.underestimatedCount) <= 0
+                                expect(dictionary.count) == 0
+                            }
+                        })
+                    }
+                })
             }
         }
         
