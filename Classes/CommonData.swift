@@ -71,6 +71,16 @@ public extension SyncData {
         }
         return result
     }
+    var startIndex: Data.Index {
+        queue.sync {
+            return self.data.startIndex
+        }
+    }
+    var endIndex: Data.Index {
+        queue.sync {
+            return self.data.endIndex
+        }
+    }
 }
 
 //MARK: Mutating
@@ -127,3 +137,56 @@ public extension SyncData {
     }
 }
 
+//MARK: Subscript
+public extension SyncData {
+    subscript(index: Data.Index) -> UInt8{
+        get {
+            queue.sync {
+                guard self.data.startIndex <= index else {
+                    return UInt8()
+                }
+                guard self.data.endIndex >= index else {
+                    return UInt8()
+                }
+                return self.data[index]
+            }
+        }
+        set {
+            queue.async(flags: .barrier) {
+                self.data[index] = newValue
+            }
+        }
+    }
+    
+    subscript(bounds: Range<Data.Index>) -> Data{
+        get {
+            queue.sync {
+                guard self.data.startIndex >= bounds.startIndex else {
+                    return Data()
+                }
+                guard self.data.endIndex <= bounds.endIndex else {
+                    return Data()
+                }
+                return self.data[bounds]
+            }
+        }
+        set {
+            queue.async(flags: .barrier) {
+                self.data[bounds] = newValue
+            }
+        }
+    }
+    
+    subscript<R>(rangeExpression: R) -> Data where R : RangeExpression, R.Bound : FixedWidthInteger{
+        get {
+            queue.sync {
+                return self.data[rangeExpression]
+            }
+        }
+        set {
+            queue.async(flags: .barrier) {
+                self.data[rangeExpression] = newValue
+            }
+        }
+    }
+}
