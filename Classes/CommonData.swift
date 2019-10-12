@@ -190,3 +190,40 @@ public extension SyncData {
         }
     }
 }
+
+//MARK: Immutable
+public extension SyncData {
+    func range(of dataToFind: Data, options: Data.SearchOptions = [], in range: Range<Data.Index>? = nil) -> Range<Data.Index>?{
+        queue.sync {
+            return self.data.range(of: dataToFind, options: options, in: range)
+        }
+    }
+    func subdata(in range: Range<Data.Index>) -> Data{
+        queue.sync {
+            return self.data.subdata(in: range)
+        }
+    }
+    func base64EncodedString(options: Data.Base64EncodingOptions = []) -> String{
+        queue.sync {
+            return self.data.base64EncodedString(options: options)
+        }
+    }
+    func base64EncodedData(options: Data.Base64EncodingOptions = []) -> Data{
+        queue.sync {
+            return self.data.base64EncodedData(options: options)
+        }
+    }
+    
+    func index(before i: Data.Index) -> Data.Index{
+        queue.sync {
+            return self.data.index(before: i)
+        }
+    }
+    func index(after i: Data.Index) -> Data.Index{
+        queue.sync {
+            return self.data.index(after: i)
+        }
+    }
+
+}
+
