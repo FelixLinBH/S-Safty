@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'comthreadsafety_Example' do
-  pod 'comthreadsafety', :path => '../'
+  pod 's-safty', :path => '../'
 
   target 'comthreadsafety_Tests' do
     inherit! :search_paths

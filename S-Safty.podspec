@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'S-Safty'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'Made the component of common module thread-safty simply'
   s.swift_version = '4.0'
 
