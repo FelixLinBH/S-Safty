@@ -2,10 +2,10 @@
 
 > Made common component thread-safty.
 
-[![CI Status](https://img.shields.io/travis/FelixLinBH/s-safty.svg?style=flat)](https://travis-ci.org/FelixLinBH/S-safty)
-[![Version](https://img.shields.io/cocoapods/v/s-safty.svg?style=flat)](https://cocoapods.org/pods/S-safty)
-[![License](https://img.shields.io/cocoapods/l/s-safty.svg?style=flat)](https://cocoapods.org/pods/S-safty)
-[![Platform](https://img.shields.io/cocoapods/p/s-safty.svg?style=flat)](https://cocoapods.org/pods/S-safty)
+[![CI Status](https://img.shields.io/travis/FelixLinBH/S-Safty.svg?style=flat)](https://travis-ci.org/FelixLinBH/s-safty)
+[![Version](https://img.shields.io/cocoapods/v/S-Safty.svg?style=flat)](https://cocoapods.org/pods/s-safty)
+[![License](https://img.shields.io/cocoapods/l/S-Safty.svg?style=flat)](https://cocoapods.org/pods/s-safty)
+[![Platform](https://img.shields.io/cocoapods/p/S-Safty.svg?style=flat)](https://cocoapods.org/pods/s-safty)
 
 ## Requirements
 
