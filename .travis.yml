@@ -10,6 +10,6 @@ language: swift
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 script:
-- xctool -workspace Example/comthreadsafety.xcworkspace -scheme comthreadsafety-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-- xctool test -workspace Example/comthreadsafety.xcworkspace -scheme comthreadsafety-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+- set -o pipefail
+- xcodebuild build -workspace Example/comthreadsafety.xcworkspace -sdk iphonesimulator -scheme comthreadsafety-Example -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
 - pod lib lint
