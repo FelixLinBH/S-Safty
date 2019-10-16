@@ -11,5 +11,5 @@ language: swift
 # - pod install --project-directory=Example
 script:
 - set -o pipefail
-- xcodebuild build -workspace Example/comthreadsafety.xcworkspace -sdk iphonesimulator -scheme comthreadsafety-Example -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
+- xcodebuild build -workspace Example/comthreadsafety.xcworkspace -sdk iphonesimulator -scheme comthreadsafety-Example -configuration Debug -destination "platform=iOS Simulator,name=iPhone 8" -destination "platform=iOS Simulator,name=iPhone 8 Plus" | xcpretty -c
 - pod lib lint
